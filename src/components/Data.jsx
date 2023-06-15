@@ -37,8 +37,17 @@ const Price = styled.p`
   margin-top: 10px;
 `;
 
-export default function Data() {
+const ThumbNail = styled.div`
+  max-width: 200px;
+  width: 200px;
+  height: 100px;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  background-image: url(${(props) => props.backgroundUrl});
+`;
 
+export default function Data() {
   const [users, setUsers] = useState([]);
   // db의 users 컬렉션을 가져옴
   const usersCollectionRef = collection(firestore, "편의점과자");
@@ -58,6 +67,7 @@ export default function Data() {
   const showUsers = users.map((value, i) => (
     <Container key={i}>
       <Product>
+        <ThumbNail backgroundUrl={value.이미지} />
         <FlexGrow>
           <Title>{value.이름}</Title>
           <Price> 칼로리 : {value.칼로리} kcal</Price>
