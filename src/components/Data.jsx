@@ -2,6 +2,8 @@ import { firestore } from "src/firebase";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
+import { getDday } from "src/hooks/getDday";
+import { getLastTime } from "src/hooks/getLastTime";
 
 const Container = styled.div`
   margin-top: 20px;
@@ -72,6 +74,9 @@ export default function Data() {
           <Title>{value.이름}</Title>
           <Price> 칼로리 : {value.칼로리} kcal</Price>
           <Date>유통기한 : {value.유통기한}</Date>
+          <Date>유통기간 : D{getDday(value.유통기간)}</Date>
+          <Date>유통기간 : {getLastTime(value.유통기간)}</Date>
+          {/* firebase에서 유통기간이라는 이름의 필드와 자료형은 timestamp로 설정해주었음 */}
         </FlexGrow>
       </Product>
     </Container>
